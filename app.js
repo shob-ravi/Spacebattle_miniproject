@@ -14,8 +14,15 @@ class alienShip{
         this.accuracy = [.6,.7,.8]
     }
 }
+
+const alienShip_array = [];
 let player1 = new spaceShip();
 console.log(player1);
 
+for(let i= 0;i<6;i++)
+{
 let player2 = new alienShip();
-console.log(player2);
+// console.log(player2);
+alienShip_array.push(player2);
+console.log(alienShip_array);
+}
