@@ -65,8 +65,8 @@ class alienShip extends spaceShip {
 
 const alienShip_array = [];
 let humanplayer1 = new spaceShip("humanShip", 20, 5, .7);
-console.log(humanplayer1);
-
+// console.log(humanplayer1);
+function startGame() {
     for (let i = 0; i < 6; i++) {
         let alienplayer2 = new alienShip();
 
@@ -74,10 +74,18 @@ console.log(humanplayer1);
         const alien = alienShip_array[i];
         while (!alien.IsShipDestroyed() && !humanplayer1.IsShipDestroyed()) {
             humanplayer1.attack(alien);
-            if (alien.isDestroyed()) {
+            if (alien.IsShipDestroyed()) {
                 console.log(`${alien.name} has been destroyed!`);
                 break;
             }
+            // Alien attacks
+            alien.attack(humanplayer1);
+            if (humanplayer1.IsShipDestroyed()) {
+                console.log("USS Assembly has been destroyed. Game over!");
+                return;
+            }
 
+        }
     }
-    }
+}
+startGame();
