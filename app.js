@@ -52,12 +52,12 @@ class HumanShip extends spaceShip {
 class alienShip extends spaceShip {
     constructor() {
         //    this.name = "alienShip" ;
-        const random_hull = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
-        console.log(random_hull);
-        const random_firepower = Math.floor(Math.random() * (4 - 2 + 1)) + 2;
-        console.log(random_firepower);
-        const random_accuracy = Math.random() * (0.8 - 0.6) + 0.6;
-        console.log(random_accuracy);
+        const random_hull = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+        // console.log(random_hull);
+        const random_firepower = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
+        // console.log(random_firepower);
+        const random_accuracy = Math.random() * (0.5 - 0.4) + 0.4;
+        // console.log(random_accuracy);
         super("alienShip", random_hull, random_firepower, random_accuracy)
     }
 
@@ -69,7 +69,7 @@ let humanplayer1 = new spaceShip("humanShip", 20, 5, .7);
 function startGame() {
     for (let i = 0; i < 6; i++) {
         let alienplayer2 = new alienShip();
-
+        alienplayer2.name+=i;
         alienShip_array.push(alienplayer2);
         const alien = alienShip_array[i];
         while (!alien.IsShipDestroyed() && !humanplayer1.IsShipDestroyed()) {
