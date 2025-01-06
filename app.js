@@ -88,7 +88,7 @@ function startGame() {
                 currentAlien=i;
                 updateProgressBars();
                 console.log(`${alien.name} has been destroyed!`);
-                 if (currentAlien >= alienShip_array.length) {
+                 if (currentAlien >= 5) {
                     endGame("Congratulations! All alien ships have been destroyed!");
                     return;
                   }
