@@ -25,7 +25,8 @@ class spaceShip {
         console.log("input" + JSON.stringify(input));
         console.log(`${this.accuracy},${input.accuracy}`);
         if (this.accuracy < input.accuracy) {
-            console.log("human accuracy less than alien accuracy");
+            console.log(`${this.accuracy} less than ${input.accuracy}`);
+            console.log(`${this.name} misses ${input.name}!`);
             return `${this.name} misses ${input.name}!`;
         }
         else {
@@ -78,7 +79,8 @@ function startGame() {
     
     for (let i = 0; i < 6; i++) {
         let alienplayer2 = new alienShip();
-        alienplayer2.name+=i;        
+        alienplayer2.name+=i;
+        console.log("alienplayer2.name" +alienplayer2.name)        ;
         alienShip_array.push(alienplayer2);
         const alien = alienShip_array[i];
         while (!alien.IsShipDestroyed() && !humanplayer1.IsShipDestroyed()) {
@@ -114,7 +116,7 @@ function updateProgressBars() {
     humanshipHealthEl.style.width = `${humanPercentage}%`;
     if (alienShip_array.length>0) 
     {
-        console.log("alien array" +JSON.stringify(alienShip_array));
+        // console.log("alien array" +JSON.stringify(alienShip_array));
         console.log("current:::" +currentAlien);
         let alienPercentage =  Math.max((alienShip_array[currentAlien].hull / alienShip_array[currentAlien].maxHull) * 100,0);
         alienHealthEl.style.width = `${alienPercentage}%`;
