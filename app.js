@@ -58,11 +58,11 @@ class HumanShip extends spaceShip {
 class alienShip extends spaceShip {
     constructor() {
         //    this.name = "alienShip" ;
-        const random_hull = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+        const random_hull = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
         // console.log(random_hull);
-        const random_firepower = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
+        const random_firepower = Math.floor(Math.random() * (4 - 2 + 1)) + 2;
         // console.log(random_firepower);
-        const random_accuracy = Math.random() * (0.5 - 0.4) + 0.4;
+        const random_accuracy = Math.random() * (0.8 - 0.6) + 0.6;
         // console.log(random_accuracy);
         
         super("alienShip", random_hull, random_firepower, random_accuracy)
@@ -78,14 +78,12 @@ function startGame() {
     for (let i = 0; i < 6; i++) {
         let alienplayer2 = new alienShip();
         alienplayer2.name+=i;        
-        
         alienShip_array.push(alienplayer2);
         const alien = alienShip_array[i];
         while (!alien.IsShipDestroyed() && !humanplayer1.IsShipDestroyed()) {
-            
             let message = humanplayer1.attack(alien);
             addLog(message);
-            updateProgressBars();
+            //updateProgressBars();
             if (alien.IsShipDestroyed()) {
                 currentAlien=i;
                 updateProgressBars();
@@ -93,26 +91,29 @@ function startGame() {
                 break;
             }
             // Alien attacks
-            message =alien.attack(humanplayer1);
-            addLog(message);
-            updateProgressBars();
-            if (humanplayer1.IsShipDestroyed()) {
-                updateProgressBars();
-                console.log("USS Assembly has been destroyed. Game over!");
-                return;
-            }
-
+                message =alien.attack(humanplayer1);
+                addLog(message);
+                //updateProgressBars();
+                if (humanplayer1.IsShipDestroyed()) {
+                    currentAlien=i;
+                    updateProgressBars();
+                    console.log("USS Assembly has been destroyed. Game over!");
+                    return;
+                }
         }
     }
 }
 // Update health bars
 function updateProgressBars() {
-    humanshipHealthEl.style.width = `${(humanplayer1.hull / humanplayer1.maxHull) * 100}%`;
+    let humanPercentage =  Math.max((humanplayer1.hull / humanplayer1.maxHull) * 100,0);
+    humanshipHealthEl.style.width = `${humanPercentage}%`;
     if (alienShip_array.length>0) 
     {
         console.log("alien array" +JSON.stringify(alienShip_array));
         console.log("current:::" +currentAlien);
-        alienHealthEl.style.width = `${(alienShip_array[currentAlien].hull / alienShip_array[currentAlien].maxHull) * 100}%`;
+        let alienPercentage =  Math.max((alienShip_array[currentAlien].hull / alienShip_array[currentAlien].maxHull) * 100,0);
+        alienHealthEl.style.width = `${alienPercentage}%`;
+        
     }
   }
 
