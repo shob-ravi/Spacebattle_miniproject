@@ -121,15 +121,11 @@ function updateProgressBars() {
         // console.log("alien array" +JSON.stringify(alienShip_array));
         console.log("current:::" + currentAlien);
         let alienPercentage = Math.max((alienShip_array[currentAlien].hull / alienShip_array[currentAlien].maxHull) * 100, 0);
-        alienHealthEl.style.width = `${alienPercentage}%`;
+        alienHealthEl.style.width = `${alienPercentage}%`;       
 
-    }
-    // Optional: Change color based on health level
-    if (humanPercentage < 30) {
-        humanshipHealthEl.style.backgroundColor = "red";
-    } else {
-        humanshipHealthEl.style.backgroundColor = "green";
-    }
+    }   
+
+    
 }
 
 // Add a log message
