@@ -58,11 +58,11 @@ class HumanShip extends spaceShip {
 class alienShip extends spaceShip {
     constructor() {
         //    this.name = "alienShip" ;
-        const random_hull = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
+        const random_hull = Math.floor(Math.random() * (3 - 2 + 1)) + 2;
         // console.log(random_hull);
-        const random_firepower = Math.floor(Math.random() * (4 - 2 + 1)) + 2;
+        const random_firepower = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
         // console.log(random_firepower);
-        const random_accuracy = Math.random() * (0.8 - 0.6) + 0.6;
+        const random_accuracy = Math.random() * (0.5 - 0.4) + 0.4;
         // console.log(random_accuracy);
         
         super("alienShip", random_hull, random_firepower, random_accuracy)
@@ -88,6 +88,10 @@ function startGame() {
                 currentAlien=i;
                 updateProgressBars();
                 console.log(`${alien.name} has been destroyed!`);
+                 if (currentAlien >= alienShip_array.length) {
+                    endGame("Congratulations! All alien ships have been destroyed!");
+                    return;
+                  }
                 break;
             }
             // Alien attacks
@@ -124,6 +128,17 @@ function addLog(message) {
     logEl.appendChild(logEntry);
   }
   updateProgressBars();
+  // End the game
+    function endGame(message) {
+        updateStatus(message);
+        startBtn.disabled = true;
+        
+    }
+
+        // Update the status message
+    function updateStatus(message) {
+        statusEl.innerText = message;
+    }
 
 
 
