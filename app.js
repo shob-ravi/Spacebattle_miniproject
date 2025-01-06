@@ -58,11 +58,11 @@ class HumanShip extends spaceShip {
 class alienShip extends spaceShip {
     constructor() {
         //    this.name = "alienShip" ;
-        const random_hull = Math.floor(Math.random() * (3 - 2 + 1)) + 2;
+        const random_hull = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
         // console.log(random_hull);
-        const random_firepower = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
+        const random_firepower = Math.floor(Math.random() * (4 - 2 + 1)) + 2;
         // console.log(random_firepower);
-        const random_accuracy = Math.random() * (0.5 - 0.4) + 0.4;
+        const random_accuracy = Math.random() * (0.8 - 0.6) + 0.6;
         // console.log(random_accuracy);
         
         super("alienShip", random_hull, random_firepower, random_accuracy)
