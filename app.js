@@ -64,6 +64,7 @@ class alienShip extends spaceShip {
         // console.log(random_firepower);
         const random_accuracy = Math.random() * (0.5 - 0.4) + 0.4;
         // console.log(random_accuracy);
+        
         super("alienShip", random_hull, random_firepower, random_accuracy)
     }
 
@@ -76,8 +77,7 @@ function startGame() {
     
     for (let i = 0; i < 6; i++) {
         let alienplayer2 = new alienShip();
-        alienplayer2.name+=i;
-        currentAlien+=i;
+        alienplayer2.name+=i;        
         
         alienShip_array.push(alienplayer2);
         const alien = alienShip_array[i];
@@ -85,18 +85,19 @@ function startGame() {
             
             let message = humanplayer1.attack(alien);
             addLog(message);
-            updateHealthBars();
+            updateProgressBars();
             if (alien.IsShipDestroyed()) {
-                updateHealthBars();
+                currentAlien=i;
+                updateProgressBars();
                 console.log(`${alien.name} has been destroyed!`);
                 break;
             }
             // Alien attacks
             message =alien.attack(humanplayer1);
             addLog(message);
-            updateHealthBars();
+            updateProgressBars();
             if (humanplayer1.IsShipDestroyed()) {
-                updateHealthBars();
+                updateProgressBars();
                 console.log("USS Assembly has been destroyed. Game over!");
                 return;
             }
@@ -107,7 +108,12 @@ function startGame() {
 // Update health bars
 function updateProgressBars() {
     humanshipHealthEl.style.width = `${(humanplayer1.hull / humanplayer1.maxHull) * 100}%`;
-    alienHealthEl.style.width = `${(alienShip_array[currentAlien].hull / alienShip_array[currentAlien].maxHull) * 100}%`;
+    if (alienShip_array.length>0) 
+    {
+        console.log("alien array" +JSON.stringify(alienShip_array));
+        console.log("current:::" +currentAlien);
+        alienHealthEl.style.width = `${(alienShip_array[currentAlien].hull / alienShip_array[currentAlien].maxHull) * 100}%`;
+    }
   }
 
   // Add a log message
@@ -116,7 +122,7 @@ function addLog(message) {
     logEntry.innerText = message;
     logEl.appendChild(logEntry);
   }
-  updateHealthBars();
+  updateProgressBars();
 
 
 
