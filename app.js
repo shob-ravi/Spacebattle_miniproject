@@ -8,6 +8,9 @@ const logEl = document.getElementById("log");
 const startBtn = document.getElementById("startBtn");
 
 const player1Image = document.getElementById("player1_img");
+const player2Image = document.getElementById("player2_img");
+player1Image.width = 150;
+player1Image.height = 150;
 player1Image.width = 150;
 player1Image.height = 150;
 
