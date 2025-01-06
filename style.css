@@ -48,3 +48,10 @@
     font-size: 18px;
     color: #ff0;
   }
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 100%; 
+    object-fit: contain; */
+  }
