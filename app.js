@@ -25,6 +25,7 @@ class spaceShip {
         console.log("input" + JSON.stringify(input));
         console.log(`${this.accuracy},${input.accuracy}`);
         if (this.accuracy < input.accuracy) {
+            console.log("human accuracy less than alien accuracy");
             return `${this.name} misses ${input.name}!`;
         }
         else {
