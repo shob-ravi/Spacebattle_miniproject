@@ -101,7 +101,7 @@ function startGame() {
                 if (humanplayer1.IsShipDestroyed()) {
                     currentAlien=i;
                     updateProgressBars();
-                    console.log("USS Assembly has been destroyed. Game over!");
+                    endGame("USS Assembly has been destroyed. Game over!");
                     return;
                 }
         }
