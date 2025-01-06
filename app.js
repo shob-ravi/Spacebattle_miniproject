@@ -26,7 +26,7 @@ class spaceShip {
         console.log(`${this.accuracy},${input.accuracy}`);
         if (this.accuracy < input.accuracy) {
             // console.log(`${this.accuracy} less than ${input.accuracy}`);
-            console.log(`${this.name} misses ${input.name}!`);
+            // console.log(`${this.name} misses ${input.name}!`);
             return `${this.name} misses ${input.name}!`;
         }
         else {
