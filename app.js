@@ -33,7 +33,7 @@ class spaceShip {
             return `${this.name} misses ${input.name}!`;
         }
         else {
-            
+
             input.hull -= this.firepower;
             console.log('input.hull' + input.hull);
             return `${this.name} hits ${input.name} for ${this.firepower} damage!`;
@@ -69,7 +69,7 @@ class alienShip extends spaceShip {
         // console.log(random_firepower);
         const random_accuracy = Math.random() * (0.8 - 0.6) + 0.6;
         // console.log(random_accuracy);
-        
+
         super("alienShip", random_hull, random_firepower, random_accuracy)
     }
 
@@ -79,11 +79,11 @@ const alienShip_array = [];
 let humanplayer1 = new spaceShip("humanShip", 20, 5, .7);
 // console.log(humanplayer1);
 function startGame() {
-    
+
     for (let i = 0; i < 6; i++) {
         let alienplayer2 = new alienShip();
-        alienplayer2.name+=i;
-        console.log("alienplayer2.name" +alienplayer2.name)        ;
+        alienplayer2.name += i;
+        console.log("alienplayer2.name" + alienplayer2.name);
         alienShip_array.push(alienplayer2);
         const alien = alienShip_array[i];
         while (!alien.IsShipDestroyed() && !humanplayer1.IsShipDestroyed()) {
@@ -91,62 +91,66 @@ function startGame() {
             addLog(message);
             //updateProgressBars();
             if (alien.IsShipDestroyed()) {
-                currentAlien=i;
+                currentAlien = i;
                 updateProgressBars();
                 console.log(`${alien.name} has been destroyed!`);
-                 if (currentAlien >= 5) {
+                if (currentAlien >= 5) {
                     endGame("Congratulations! All alien ships have been destroyed!");
                     return;
-                  }
+                }
                 break;
             }
             // Alien attacks
-                message =alien.attack(humanplayer1);
-                addLog(message);
-                //updateProgressBars();
-                if (humanplayer1.IsShipDestroyed()) {
-                    currentAlien=i;
-                    updateProgressBars();
-                    endGame("USS Assembly has been destroyed. Game over!");
-                    return;
-                }
+            message = alien.attack(humanplayer1);
+            addLog(message);
+            //updateProgressBars();
+            if (humanplayer1.IsShipDestroyed()) {
+                currentAlien = i;
+                updateProgressBars();
+                endGame("USS Assembly has been destroyed. Game over!");
+                return;
+            }
         }
     }
 }
 // Update health bars
 function updateProgressBars() {
-    let humanPercentage =  Math.max((humanplayer1.hull / humanplayer1.maxHull) * 100,0);
+    let humanPercentage = Math.max((humanplayer1.hull / humanplayer1.maxHull) * 100, 0);
     humanshipHealthEl.style.width = `${humanPercentage}%`;
-    if (alienShip_array.length>0) 
-    {
+    if (alienShip_array.length > 0) {
         // console.log("alien array" +JSON.stringify(alienShip_array));
-        console.log("current:::" +currentAlien);
-        let alienPercentage =  Math.max((alienShip_array[currentAlien].hull / alienShip_array[currentAlien].maxHull) * 100,0);
+        console.log("current:::" + currentAlien);
+        let alienPercentage = Math.max((alienShip_array[currentAlien].hull / alienShip_array[currentAlien].maxHull) * 100, 0);
         alienHealthEl.style.width = `${alienPercentage}%`;
-        
-    }
-  }
 
-  // Add a log message
+    }
+    // Optional: Change color based on health level
+    if (humanPercentage < 30) {
+        humanshipHealthEl.style.backgroundColor = "red";
+    } else {
+        humanshipHealthEl.style.backgroundColor = "green";
+    }
+}
+
+// Add a log message
 function addLog(message) {
     const logEntry = document.createElement("div");
     logEntry.innerText = message;
     logEl.appendChild(logEntry);
-  }
-  updateProgressBars();
-  // End the game
-    function endGame(message) {
-        updateStatus(message);
-        startBtn.disabled = true;
-        
-    }
+}
+updateProgressBars();
+// End the game
+function endGame(message) {
+    updateStatus(message);
+    startBtn.disabled = true;
 
-        // Update the status message
-    function updateStatus(message) {
-        statusEl.innerText = message;
-    }
+}
 
-
+// Update the status message
+function updateStatus(message) {
+    statusEl.innerText = message;
+}
 
 
-  
+
+
