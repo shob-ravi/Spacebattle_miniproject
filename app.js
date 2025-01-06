@@ -8,8 +8,8 @@ const logEl = document.getElementById("log");
 const startBtn = document.getElementById("startBtn");
 
 const player1Image = document.getElementById("player1_img");
-player1Image.width = 100;
-player1Image.height = 100;
+player1Image.width = 150;
+player1Image.height = 150;
 
 class spaceShip {
     constructor(name, hull, firepower, accuracy) {
