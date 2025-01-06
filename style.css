@@ -1,8 +1,9 @@
 .container{
     height:200vh;
     width:100%;
-    border:solid black;
+    border:solid orangered;
     background: #111;
+    border-radius: 5%;
 }
 .ship {
     margin: 20px;
