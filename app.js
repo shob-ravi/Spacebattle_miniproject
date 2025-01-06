@@ -75,6 +75,7 @@ function startGame() {
         while (!alien.IsShipDestroyed() && !humanplayer1.IsShipDestroyed()) {
             humanplayer1.attack(alien);
             if (alien.IsShipDestroyed()) {
+                
                 console.log(`${alien.name} has been destroyed!`);
                 break;
             }
