@@ -25,12 +25,13 @@ class spaceShip {
         console.log("input" + JSON.stringify(input));
         console.log(`${this.accuracy},${input.accuracy}`);
         if (this.accuracy < input.accuracy) {
-            console.log(`${this.name} misses ${input.name}!`)
+            return `${this.name} misses ${input.name}!`;
         }
         else {
-            console.log(`${this.name} hits ${input.name} for ${this.firepower} damage!`);
+            
             input.hull -= this.firepower;
             console.log('input.hull' + input.hull);
+            return `${this.name} hits ${input.name} for ${this.firepower} damage!`;
         }
     }
 
@@ -72,21 +73,30 @@ const alienShip_array = [];
 let humanplayer1 = new spaceShip("humanShip", 20, 5, .7);
 // console.log(humanplayer1);
 function startGame() {
+    
     for (let i = 0; i < 6; i++) {
         let alienplayer2 = new alienShip();
         alienplayer2.name+=i;
+        currentAlien+=i;
+        
         alienShip_array.push(alienplayer2);
         const alien = alienShip_array[i];
         while (!alien.IsShipDestroyed() && !humanplayer1.IsShipDestroyed()) {
-            humanplayer1.attack(alien);
+            
+            let message = humanplayer1.attack(alien);
+            addLog(message);
+            updateHealthBars();
             if (alien.IsShipDestroyed()) {
-
+                updateHealthBars();
                 console.log(`${alien.name} has been destroyed!`);
                 break;
             }
             // Alien attacks
-            alien.attack(humanplayer1);
+            message =alien.attack(humanplayer1);
+            addLog(message);
+            updateHealthBars();
             if (humanplayer1.IsShipDestroyed()) {
+                updateHealthBars();
                 console.log("USS Assembly has been destroyed. Game over!");
                 return;
             }
@@ -100,10 +110,15 @@ function updateProgressBars() {
     alienHealthEl.style.width = `${(alienShip_array[currentAlien].hull / alienShip_array[currentAlien].maxHull) * 100}%`;
   }
 
-
-// Update the status message
-function updateStatus(message) {
-    statusEl.innerText = message;
+  // Add a log message
+function addLog(message) {
+    const logEntry = document.createElement("div");
+    logEntry.innerText = message;
+    logEl.appendChild(logEntry);
   }
+  updateHealthBars();
 
-  startGame();
+
+
+
+  
